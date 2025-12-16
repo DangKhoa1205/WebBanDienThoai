@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanMobiStore - Đại Dương Công Nghệ</title>
+     <link rel="icon" href="./logoWebOceanMobiStore.png" type="image/x-icon">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0069d9; /* Xanh đại dương đậm */
+            --accent-color: #0dcaf0;  /* Xanh biển nhạt */
+            --bg-light: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            padding-bottom: 60px; /* Tránh bị footer che mất nội dung cuối */
+        }
+
+        /* --- RESPONSIVE NAVBAR --- */
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        /* --- PRODUCT CARD --- */
+        .product-card {
+            border: none;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-img-wrapper {
+            height: 200px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .product-img-wrapper img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Badge Sale */
+        .badge-sale {
+            position: absolute; top: 10px; right: 10px;
+            background: #dc3545; color: white;
+            padding: 5px 10px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: bold;
+            box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+        }
+
+        /* --- BUTTONS STYLES (OCEAN THEME) --- */
+
+        /* 1. Nút Lọc Hãng */
+        .filter-btn {
+            background-color: white;
+            border: 1px solid #e3e6e8;
+            color: #555;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #0069d9 0%, #0dcaf0 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(13, 202, 240, 0.4);
+        }
+
+        /* 2. Nút Gradient Chủ Đạo */
+        .btn-ocean {
+            background: linear-gradient(135deg, #0069d9 0%, #0dcaf0 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 24px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 105, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-ocean:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 105, 217, 0.5);
+            color: white;
+        }
+
+        /* 3. Nút Icon Tròn (Admin) */
+        .btn-icon {
+            width: 35px; height: 35px;
+            display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 50%; border: none; transition: all 0.2s; margin: 0 3px;
+        }
+        .btn-icon.edit { background-color: #e7f1ff; color: #0d6efd; }
+        .btn-icon.edit:hover { background-color: #0d6efd; color: white; transform: rotate(15deg); }
+        .btn-icon.delete { background-color: #ffebe9; color: #dc3545; }
+        .btn-icon.delete:hover { background-color: #dc3545; color: white; transform: scale(1.1); }
+
+        /* 4. Tabs Admin */
+        .nav-pills .nav-link {
+            border-radius: 30px; padding: 8px 20px; color: #555; font-weight: 600; transition: 0.3s;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #0069d9; box-shadow: 0 4px 10px rgba(0, 105, 217, 0.3);
+        }
+
+        /* --- MARQUEE (CHỮ CHẠY) --- */
+        .marquee-bar {
+            background: #0056b3;
+            color: white;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* --- BACK TO TOP BUTTON --- */
+        #btn-back-to-top {
+            position: fixed; bottom: 20px; right: 20px; display: none;
+            z-index: 999; width: 45px; height: 45px; border-radius: 50%;
+            background: var(--primary-color); color: white; border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        #btn-back-to-top:hover { transform: translateY(-3px); }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .navbar-brand { font-size: 1.2rem; }
+            .product-img-wrapper { height: 160px; }
+            h1.display-4 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nơi chứa ứng dụng -->
+    <div id="app"></div>
+    
+    <!-- Nút cuộn trang -->
+    <button id="btn-back-to-top" onclick="scrollToTop()">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Thư viện JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JS dự án (Đảm bảo thứ tự) -->
+    <script src="config.js"></script>
+    <script src="login.js"></script>
+    <script src="register.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

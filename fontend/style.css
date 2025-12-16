@@ -1,0 +1,44 @@
+body {
+    background-color: #f8f9fa; /* Màu nền xám nhẹ hiện đại */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Ảnh Banner nền (Bạn có thể thay link ảnh khác) */
+.header-banner {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556656793-02774a8316ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Hiệu ứng thẻ sản phẩm */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Bỏ viền đen mặc định */
+    border-radius: 15px; /* Bo tròn góc */
+    overflow: hidden;
+}
+
+/* Khi di chuột vào thì thẻ nổi lên */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain; /* Giữ ảnh không bị méo */
+    padding: 15px;
+}
+
+.price-tag {
+    color: #d63031; /* Màu đỏ giá tiền */
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #b2bec3;
+    font-size: 0.9rem;
+}

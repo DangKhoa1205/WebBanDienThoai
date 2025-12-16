@@ -1,0 +1,12 @@
+{
+  "name": "frontend-server",
+  "version": "1.0.0",
+  "description": "Frontend Web Server",
+  "main": "web-server.js",
+  "scripts": {
+    "start": "node web-server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
